@@ -1,4 +1,4 @@
-const memory = require("./memory.js");
+const memory = require('./memory.js');
 // 1. Implement an Array class from scratch.
 let Memory = new memory();
 
@@ -23,7 +23,7 @@ class Array {
     const oldPtr = this.ptr;
     this.ptr = Memory.allocate(size);
     if (this.ptr === null) {
-      throw new Error("Out of Memory");
+      throw new Error('Out of Memory');
     }
     Memory.copy(this.ptr, oldPtr, this.length);
     Memory.free(oldPtr);
@@ -31,13 +31,13 @@ class Array {
   }
   get(index) {
     if (index < 0 || index >= this.length) {
-      throw new Error("Index error");
+      throw new Error('Index error');
     }
     return Memory.get(this.ptr + index);
   }
   pop() {
-    if (this.length == 0) {
-      throw new Error("Index error");
+    if (this.length === 0) {
+      throw new Error('Index error');
     }
     const value = Memory.get(this.ptr + this.length - 1);
     this.length--;
@@ -45,7 +45,7 @@ class Array {
   }
   remove(index) {
     if (index < 0 || index >= this.length) {
-      throw new Error("Index error");
+      throw new Error('Index error');
     }
     Memory.copy(
       this.ptr + index,
@@ -92,10 +92,10 @@ class Array {
 // The purpose of the resize function is to increase the capacity whenever the length of the array is equal to or greater than the capacity and it changes position of the pointer to the beginning of the newly allocated empty spaces.
 
 const urlify = function(string) {
-  let newUrl = "";
+  let newUrl = '';
   for (let i = 0; i < string.length; i++) {
-    if (string[i] === " ") {
-      newUrl += "%20";
+    if (string[i] === ' ') {
+      newUrl += '%20';
     } else {
       newUrl += string[i];
     }
@@ -115,16 +115,42 @@ const filterOutFive = function(arr) {
   return noFiveArray;
 };
 
-const zeroOneSort = function(arr) {
-  let temp = "";
+function maxSum(arr) {
+  let maxSum = 0;
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === "0" && arr[i + 1] === "1") {
-      temp == arr[i];
-      arr[i] = arr[i + 1];
-      arr[i + 1] = temp;
+    let sum = arr[i];
+    for (let j = 1 + i; j <= arr.length; j++) {
+      sum += arr[j];
+      if (sum > maxSum) {
+        maxSum = sum;
+      }
+
     }
   }
-  return arr;
-};
+  return maxSum;
+}
 
-console.log(zeroOneSort([0, 1, 0]));
+//console.log(maxSum([4, 6, -3, 5, -2, 1]));
+
+function mergeArrays(arr1, arr2) {
+  const newArr = arr1.concat(arr2);
+  return newArr.sort((a, b) => a - b);
+}
+
+//console.log(mergeArrays([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
+
+function removeCharacters(chars, str) {
+  for (let i = 0; i < str.length; i++) {
+    for (let j = 0; j < chars.length; j++) {
+      console.log(chars[j], str[i])
+      if (chars[j] === str[i]) {
+        str[i] = '';
+      }
+    }
+    return str;
+  }
+}
+
+console.log(
+  removeCharacters('aeiou', 'Battle of the Vowels: Hawaii vs. Grozny')
+);
