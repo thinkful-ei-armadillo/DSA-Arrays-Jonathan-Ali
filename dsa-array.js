@@ -64,9 +64,10 @@ class Array {
 
 //   // Add an item to the array
 //   arr.push("tauhida");
+//   arr.push(2);
 //   // arr.push(11);
-
-//   console.log(arr.get(0));
+//   console.log(arr);
+//   console.log(arr.get(1));
 // }
 
 // main();
@@ -113,3 +114,17 @@ const filterOutFive = function(arr) {
   }
   return noFiveArray;
 };
+
+const zeroOneSort = function(arr) {
+  let temp = "";
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === "0" && arr[i + 1] === "1") {
+      temp == arr[i];
+      arr[i] = arr[i + 1];
+      arr[i + 1] = temp;
+    }
+  }
+  return arr;
+};
+
+console.log(zeroOneSort([0, 1, 0]));
