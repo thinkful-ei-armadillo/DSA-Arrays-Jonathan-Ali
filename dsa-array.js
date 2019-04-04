@@ -133,48 +133,92 @@ function maxSum(arr) {
 //console.log(maxSum([4, 6, -3, 5, -2, 1]));
 
 function mergeArrays(arr1, arr2) {
-  const newArr = arr1.concat(arr2);
-  return newArr.sort((a, b) => a - b);
+  const mergeArray = [];
+  for (let i = 0; i < arr1.length; i++) {
+    mergeArray.push(arr1[i]);
+  }
+  for (let i = 0; i < arr2.length; i++) {
+    mergeArray.push(arr2[i]);
+  }
+  let temp = "";
+  let currMin = "";
+  for (let i = 0; i < mergeArray.length; i++) {
+    currMin = i;
+    for (let j = i + 1; j < mergeArray.length; j++) {
+      if (mergeArray[currMin] > mergeArray[j]) {
+        currMin = j;
+      }
+    }
+    temp = mergeArray[i];
+    mergeArray[i] = mergeArray[currMin];
+    mergeArray[currMin] = temp;
+  }
+  return mergeArray;
 }
+console.log(mergeArrays([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
 
 //console.log(mergeArrays([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
 
-function removeCharacters(chars, str) {
-  let string = "";
+
+  const removeCharacters = function(chars, str) {
+  let modified = "";
   for (let i = 0; i < str.length; i++) {
-    
+    let currChar = str.charAt(i);
     for (let j = 0; j < chars.length; j++) {
-      if (chars[j] === str[i]) {
-        string = str.slice(str[j]);
-      } else {
-        string = str.replace(string[i], '');
+      if (currChar === chars.charAt(j)) {
+        currChar = "";
       }
     }
-    console.log(string);
-    
-    return string;
+    modified += currChar;
   }
-}
+  return modified;
+};
+
+
+console.log(
+  removeCharacters("aeiou", "Battle of the Vowels: Hawaii vs. Grozny")
+);
+
 //console.log(removeCharacters('aeiou', 'Battle of the Vowels: Hawaii vs. Grozny'));
 
-function zeroOutArray(arr) {
-  let newArr = [];
-  let rows = [];
-
+const twoDeeArray = function (arr) {
+  let mappedArray = [];
+  let cols = [];
   for (let i = 0; i < arr.length; i++) {
-    
+    mappedArray.push(arr[i]);
+
     for (let j = 0; j < arr[i].length; j++) {
       if (arr[i][j] === 0) {
-        arr.forEach((a => {     
-          a[j] = 0;
-        })
-        );
+        console.log(i, j);
+
+        mappedArray[i] = mappedArray[i].map(num => 0);
+        if (cols.indexOf(j) === -1) {
+          cols.push(j);
+        }
       }
     }
   }
-  //console.log(arr)
-  return arr;
-}
+
+  for (let i = 0; i < arr.length; i++) {
+    console.log(i);
+    for (let val of cols) {
+      console.log(val);
+      mappedArray[i][val] = 0;
+    }
+  }
+
+  return mappedArray;
+};
+
+console.log(
+  twoDeeArray([
+    [1, 0, 1, 1, 0],
+    [0, 1, 1, 1, 0],
+    [1, 1, 1, 1, 1],
+    [1, 0, 1, 1, 1],
+    [1, 1, 1, 1, 1]
+  ])
+);
 
 zeroOutArray(
   [
