@@ -140,17 +140,62 @@ function mergeArrays(arr1, arr2) {
 //console.log(mergeArrays([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]));
 
 function removeCharacters(chars, str) {
+  let string = "";
   for (let i = 0; i < str.length; i++) {
+    
     for (let j = 0; j < chars.length; j++) {
-      console.log(chars[j], str[i])
       if (chars[j] === str[i]) {
-        str[i] = '';
+        string = str.slice(str[j]);
+      } else {
+        string = str.replace(string[i], '');
       }
     }
-    return str;
+    console.log(string);
+    
+    return string;
   }
 }
+//console.log(removeCharacters('aeiou', 'Battle of the Vowels: Hawaii vs. Grozny'));
 
-console.log(
-  removeCharacters('aeiou', 'Battle of the Vowels: Hawaii vs. Grozny')
-);
+function zeroOutArray(arr) {
+  let newArr = [];
+  let rows = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    
+    for (let j = 0; j < arr[i].length; j++) {
+      if (arr[i][j] === 0) {
+        arr.forEach((a => {     
+          a[j] = 0;
+        })
+        );
+      }
+    }
+  }
+  //console.log(arr)
+  return arr;
+}
+
+zeroOutArray(
+  [
+    [1, 0, 1, 1, 0],
+    [0, 1, 1, 1, 0],
+    [1, 1, 1, 1, 1],
+    [1, 0, 1, 1, 1],
+    [1, 1, 1, 1, 1]
+  ]);
+  
+function isStringRotation(str1, str2) {
+  let newString = '';
+  let result = false;
+  for (let i = 0; i < str2.length; i++) {
+    newString = str2.slice(i, str2.length + i) + str2.slice( -str2.length, i);
+    if (newString === str1) {
+      result = true;
+    }
+  }
+  console.log(result);
+  return result;
+}
+
+isStringRotation("amazon", "azonam");
